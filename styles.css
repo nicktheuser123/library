@@ -1,3 +1,83 @@
 * {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+html {
+    background-color: black;
+}
+
+.body {
+   display: flex;
+   max-width: 60%; 
+ 
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    padding-top: 200px;      
+    align-self: center;
+    justify-self: center;
+}
+
+.book-list {
+    display: grid;
+    gap: 40px;    
+}
+
+.book-card {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;        
+}
+
+.add-button {
+    margin-top: 40px;   
+    min-width: 280px;
+}
+
+.button {
+    height: 35px;    
+    border-radius: 10px;
+    background-color: greenyellow;    
+}
+
+form {
+    display: flex;
+    flex-direction: column;        
+    gap: 20px;
+}
+
+.form-row-item {
+    display: flex;
+    flex-direction: column;
     
 }
+
+.button-wrap {
+    display: flex;
+    gap: 10px;
+}
+
+.dlg {
+    flex: 1;
+}
+ 
+#add-book-dialog[open] {  
+  display: flex;
+  flex-direction: column;
+  border: none;
+  border-radius: 10px;  
+  padding: 20px;
+  gap: 20px;
+  align-self: center;
+  justify-self: center;
+  
+} 
+
+#add-book-dialog::backdrop {  
+  background-color: #00000080;
+  
+} 
