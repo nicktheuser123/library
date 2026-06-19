@@ -4,6 +4,11 @@ function Book(title,author){
     this.id = crypto.randomUUID();
     this.title = title;
     this.author = author;
+    this.read = false;
+    this.markRead = function(){
+        this.read = true;
+    }
+
 }
 
 function addBookToLibrary(title,author){
@@ -17,13 +22,24 @@ function addBookToLibrary(title,author){
 function displayBook(book) {
     let bookList = document.getElementsByClassName('book-list')[0]
         
-        const bookDiv = createDiv("book-card");        
-        createDiv("title",book.title,bookDiv);
-        createDiv("author",book.author,bookDiv); 
+        const bookDiv = createDiv("book-card");     
+        bookDiv.setAttribute("data-id", book.id);   
+        createDiv("title", book.title, bookDiv);
+        createDiv("author", book.author, bookDiv); 
         let removeBtn = createButton("remove-button","Remove",bookDiv);
         let readBtn = createButton("read-button","Mark Read",bookDiv);
-        removeBtn.addEventListener("click",removeBook(book));
-        readBtn.addEventListener("click",readBook(book));
+        removeBtn.addEventListener("click",(e)=> {
+            
+            e.target.parentElement.remove()
+        });
+        readBtn.addEventListener("click",(e)=>{
+            let parent = e.target.parentElement
+            let result = myLibrary.filter((book)=> book.id === parent.dataset.id)
+            let b1 = result[0];
+            b1.markRead();
+            
+            
+        });
         bookList.appendChild(bookDiv);    
 
 }
@@ -39,9 +55,11 @@ function createDiv(className,text,parent){
 }
 
 function createButton(className, text, parent){
-    
+    console.log("increate!")
     const button = document.createElement('button');
     button.classList.add(`${className}`);
+    console.log("parent",parent)
+    button.setAttribute("data-id",parent.dataset.id);
     if(text) button.textContent = text; 
     if(parent) parent.appendChild(button);
     return button;
@@ -62,13 +80,4 @@ function submitClick(event){
     const dialog = document.getElementById("add-book-dialog");
     dialog.close();
     console.log("Library",myLibrary);
-}
-
-
-function removeBook(book){
-    
-}
-
-function readBook(book) {
-
 }
